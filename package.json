@@ -2,7 +2,7 @@
     "name": "rainbird-engineer-tools",
     "displayName": "Rainbird Engineer Tools",
     "description": "A collection of tools and shortcuts for use when Knowledge Authoring in rainbird",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "publisher": "tom-sherman",
     "engines": {
         "vscode": "^1.26.0"
