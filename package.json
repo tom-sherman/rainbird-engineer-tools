@@ -4,6 +4,10 @@
     "description": "A collection of tools and shortcuts for use when Knowledge Authoring in rainbird",
     "version": "0.1.0",
     "publisher": "tom-sherman",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tom-sherman/rainbird-engineer-tools.git"
+    },
     "engines": {
         "vscode": "^1.26.0"
     },
