@@ -1,11 +1,13 @@
 'use strict';
-import { commands, window, ExtensionContext } from "vscode";
-import { createConcinsts } from "./create-concinsts";
+import { commands, window, ExtensionContext } from 'vscode';
+import { createConcinsts } from './create-concinsts';
+import { createFacts } from './create-facts';
 
 export function activate (context: ExtensionContext) {
     context.subscriptions.push(commands.registerCommand('extension.rbTools', async () => {
         const options: { [key: string]: (context: ExtensionContext) => Promise<void> } = {
-            createConcinsts
+            createConcinsts,
+            createFacts
         };
 
         const quickPick = window.createQuickPick();

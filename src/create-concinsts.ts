@@ -1,6 +1,6 @@
 'use strict';
-import { window } from "vscode";
-import { eachLine } from "./each-line";
+import { window } from 'vscode';
+import { eachLine } from './util';
 
 export async function createConcinsts () {
   let editor = window.activeTextEditor;
