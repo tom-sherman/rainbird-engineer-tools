@@ -14,14 +14,24 @@ export async function createFacts () {
     new Position(endLine, Number.MAX_SAFE_INTEGER)
   );
 
-  let relationship = await window.showInputBox({
+  const minIndent = getMinIndent(editor.document.getText(range));
+  const text = editor.document.getText(range)
+    .split('\n')
+    .map(line => line.replace(minIndent, ''))
+    .join('\n');
+
+  const relationship = await window.showInputBox({
       placeHolder: 'Relationship name'
   });
 
-  let facts = '';
-  for (const [ subject, objects ] of parseFacts(editor.document.getText(range)).entries()) {
+  if (!relationship) {
+    return;
+  }
+
+  let facts = minIndent;
+  for (const [ subject, objects ] of parseFacts(text).entries()) {
     objects.forEach(object => {
-      facts = `${ facts }\n<relinst subject="${ subject }" object="${ object.trim() }" rel="${ relationship }" />`;
+      facts = `${ facts }\n${ minIndent }<relinst subject="${ subject.trim() }" object="${ object.trim() }" rel="${ relationship }" />`;
     });
   }
 
@@ -43,9 +53,9 @@ export async function createFacts () {
 function parseFacts (text: string) {
   const factMap: Map<string, string[]> = new Map();
   let currentSubject: string = '';
-  const reObject = /(?:\t| {2})\w+/;
+  const reObject = /(?:\t+|(?: {2}))\w+/;
 
-  for (const line of text.split('\n')) {
+  text.split('\n').forEach(line => {
     if (line.match(reObject) && currentSubject.length) {
       const currentObjects = factMap.get(currentSubject);
 
@@ -57,6 +67,29 @@ function parseFacts (text: string) {
     } else {
       currentSubject = line;
     }
-  }
+  });
+
   return factMap;
+}
+
+function getMinIndent (text: string) {
+  let tabIndents: boolean = true;
+
+  const nonEmptyLines = text.split('\n').filter(line => line.trim().length > 0);
+
+  const lineIndents = nonEmptyLines.map(line => {
+    let matches = line.match(/(\t)|( +)\w+$/);
+
+    if (matches && matches[1]) {
+      tabIndents = true;
+      return matches[1].length;
+    } else if (matches && matches[2]) {
+      tabIndents = false;
+      return matches[2].length;
+    } else {
+      return 0;
+    }
+  });
+
+  return (tabIndents ? '\t' : ' ').repeat(Math.min(...lineIndents));
 }
