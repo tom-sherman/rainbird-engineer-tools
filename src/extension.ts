@@ -1,41 +1,27 @@
 'use strict';
-import * as vscode from 'vscode';
+import { commands, window, ExtensionContext } from "vscode";
+import { createConcinsts } from "./create-concinsts";
 
-export function activate (context: vscode.ExtensionContext) {
-    let concInsts = vscode.commands.registerCommand('extension.concInsts', async () => {
-        let editor = vscode.window.activeTextEditor;
-        if (!editor) {
-            return;
-        }
-        let conceptType = await vscode.window.showInputBox({
-            placeHolder: 'Concept type'
-        });
+export function activate (context: ExtensionContext) {
+    context.subscriptions.push(commands.registerCommand('extension.rbTools', async () => {
+        const options: { [key: string]: (context: ExtensionContext) => Promise<void> } = {
+            createConcinsts
+        };
 
-        editor.edit(edit => {
-            if (!editor) {
-                return;
-            }
-            for (const line of eachLine(editor)) {
-                const name = line.text;
-                edit.replace(line.range, `<concinst name="${ name }" type="${ conceptType }" />`);
+        const quickPick = window.createQuickPick();
+        quickPick.items = Object.keys(options).map(label => ({ label }));
+
+        quickPick.onDidChangeSelection(selection => {
+            if (selection[0]) {
+                options[selection[0].label](context)
+                    .catch(console.error);
             }
         });
-    });
 
-    context.subscriptions.push(concInsts);
-}
+        quickPick.onDidHide(() => quickPick.dispose());
 
-function *eachLine (editor: vscode.TextEditor) {
-    const startLine = Math.min(editor.selection.anchor.line, editor.selection.active.line);
-    const endLine = Math.max(editor.selection.anchor.line, editor.selection.active.line);
-
-    for (let index = startLine; index <= endLine; index++) {
-        let range = editor.document.lineAt(index).range;
-        let text = editor.document.getText(range);
-        if (text.length) {
-            yield { range, text };
-        }
-    }
+        quickPick.show();
+    }));
 }
 
 // this method is called when your extension is deactivated

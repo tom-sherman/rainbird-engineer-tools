@@ -11,14 +11,14 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.concInsts"
+        "onCommand:extension.rbTools"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.concInsts",
-                "title": "Rainbird: Make concept instances"
+                "command": "extension.rbTools",
+                "title": "Rainbird Tools"
             }
         ]
     },
