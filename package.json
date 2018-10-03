@@ -1,7 +1,7 @@
 {
     "name": "rainbird-engineer-tools",
     "displayName": "Rainbird Engineer Tools",
-    "description": "A collection of tools and shortcuts for use when Knowledge Authoring in rainbird",
+    "description": "Adds Rainbird knowledge authoring shortcuts to Visual Studio Code.",
     "version": "0.3.2",
     "publisher": "tom-sherman",
     "repository": {
@@ -13,6 +13,7 @@
         "vscode": "^1.26.0"
     },
     "categories": [
+        "Formatters",
         "Other"
     ],
     "activationEvents": [
