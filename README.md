@@ -41,3 +41,9 @@ Triggering the command with `speaks` as the relationship name becomes:
 <relinst subject="tom" object="spanish" rel="speaks" />
 <relinst subject="dave" object="welsh" rel="speaks" />
 ```
+
+## RBLang/XML snippets
+
+This extension also provides snippets which mirror those in the Rainbird RBLang editor.
+
+*Note: These are not currently context aware so `condition` snippet will appear at any point in the XML.*

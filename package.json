@@ -14,7 +14,7 @@
     },
     "categories": [
         "Formatters",
-        "Other"
+        "Snippets"
     ],
     "activationEvents": [
         "onCommand:extension.rbTools"
@@ -25,6 +25,12 @@
             {
                 "command": "extension.rbTools",
                 "title": "Rainbird Tools"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "xml",
+                "path": "./snippets.json"
             }
         ]
     },

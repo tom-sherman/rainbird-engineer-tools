@@ -1,0 +1,62 @@
+{
+	"RBLang Map": {
+		"prefix": "rb",
+		"body": [
+			"<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+			"<rbl:kb xmlns:rbl=\"http://rbl.io/schema/RBLang\">",
+			"\t$0",
+			"</rbl:kb>"
+		]
+	},
+	"Relationship Instance - Fact": {
+		"prefix": "relinst fact",
+		"body": "<relinst type=\"$1\" subject=\"${2:%S}\" object=\"${3:%O}\" cf=\"${4:100}\" />"
+	},
+	"Relationship Instance - Rule": {
+		"prefix": "relinst rule",
+		"body": [
+			"<relinst type=\"$1\" cf=\"${2:100}\">",
+			"\t<condition rel=\"$3\" subject=\"${4:%S}\" object=\"${5:%O}\" weight=\"${6:100}\" behaviour=\"${7|mandatory,optional|}\" />",
+			"\t$0",
+			"</relinst>"
+		]
+	},
+	"Concept Instance": {
+		"prefix": "concinst",
+		"body": "<concinst name=\"$1\" type=\"$2\" />"
+	},
+	"Condition": {
+		"prefix": "condition",
+		"body": "<condition rel=\"$1\" subject=\"${2:%S}\" object=\"${3:%O}\" weight=\"${4:100}\" behaviour=\"${5|mandatory,optional|}\" />"
+	},
+	"Concept": {
+		"prefix": "concept",
+		"body": "<concept name=\"$1\" type=\"${2|string,number,date,truth|}\" />"
+	},
+	"Relationship": {
+		"prefix": "rel",
+		"body": "<rel name=\"$1\" subject=\"$2\" object=\"$3\" plural=\"${4|false,true|}\" allowUnknown=\"${5|false,true|}\" askable=\"${6|all,none,secondFormSubject,secondFormObject|}\" />"
+	},
+	"Condition Expression": {
+		"prefix": "condition:expression",
+		"body": "<condition expression=\"$1\" weight=\"${2:100}\" behaviour=\"${3|mandatory,optional|}\"  />"
+	},
+	"Condition Expression with Value": {
+		"prefix": "condition:expression:value",
+		"body": "<condition expression=\"$1\" value=\"${2:%O}\" weight=\"${3:100}\" behaviour=\"${4|mandatory,optional|}\"  />"
+	},
+	"Datasource": {
+		"prefix": "datasource",
+		"body": [
+			"<datasource hostname=\"$1\" path=\"$2\">",
+			"\t<action map=\"$3\" />$4",
+			"\t<input rel=\"$5\" subject=\"$6\" object=\"$7\" />",
+			"\t$0",
+			"</datasource>"
+		]
+	},
+	"Import": {
+		"prefix": "import",
+		"body": "<import km=\"$1\" versionNumber=\"$2\" />"
+	}
+}
