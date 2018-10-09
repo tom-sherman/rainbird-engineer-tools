@@ -17,6 +17,12 @@
         "Formatters",
         "Snippets"
     ],
+    "keywords": [
+        "rainbird",
+        "AI",
+        "artificial intelligence",
+        "automate decision making"
+    ],
     "activationEvents": [
         "onCommand:extension.rbTools"
     ],
