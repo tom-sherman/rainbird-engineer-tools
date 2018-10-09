@@ -23,6 +23,9 @@
         "artificial intelligence",
         "automate decision making"
     ],
+    "bugs": {
+        "url": "https://github.com/tom-sherman/rainbird-engineer-tools/issues"
+    },
     "activationEvents": [
         "onCommand:extension.rbTools"
     ],
