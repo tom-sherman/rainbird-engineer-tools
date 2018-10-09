@@ -28,7 +28,7 @@ export async function createFacts () {
 
   for (const [ subject, objects ] of parseFacts(text).entries()) {
     objects.forEach(object => {
-      facts = `${ facts }${ minIndent }<relinst subject="${ subject }" object="${ object }" type="${ relationship }" />\n`;
+      facts = `${ facts }${ minIndent }<relinst subject="${ subject }" object="${ object }" type="${ relationship }" cf="100" />\n`;
     });
   }
 
