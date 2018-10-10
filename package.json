@@ -29,6 +29,7 @@
     "activationEvents": [
         "onCommand:extension.rbTools"
     ],
+    "icon": "./images/rainbird-logo.png",
     "main": "./out/extension",
     "contributes": {
         "commands": [
