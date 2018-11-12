@@ -1,7 +1,7 @@
 'use strict';
 
 import { getBoundaryLines, getMinIndent, factTag } from './util';
-import { Position, Range, window } from 'vscode';
+import { window } from 'vscode';
 
 export async function createFacts () {
   let editor = window.activeTextEditor;
