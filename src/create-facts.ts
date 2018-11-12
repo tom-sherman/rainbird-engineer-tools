@@ -9,11 +9,7 @@ export async function createFacts () {
     return;
   }
 
-  const { startLine, endLine } = getBoundaryLines(editor);
-  const range = new Range(
-    new Position(startLine, 0),
-    new Position(endLine, Number.MAX_SAFE_INTEGER)
-  );
+  const range = getBoundaryLines(editor);
 
   const relationship = await window.showInputBox({
     placeHolder: 'Relationship name'
