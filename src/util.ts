@@ -42,3 +42,7 @@ export function getMinIndent (text: string) {
 
   return (tabIndents ? '\t' : ' ').repeat(Math.min(...lineIndents));
 }
+
+export function factTag (subject: string, relationship: string, object: string) {
+  return `<relinst type="${ relationship }" subject="${ subject }" object="${ object }" cf="100" />`;
+}

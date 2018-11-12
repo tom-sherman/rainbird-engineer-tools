@@ -1,6 +1,6 @@
 'use strict';
 
-import { getBoundaryLines, getMinIndent } from './util';
+import { getBoundaryLines, getMinIndent, factTag } from './util';
 import { Position, Range, window } from 'vscode';
 
 export async function createFacts () {
@@ -28,7 +28,7 @@ export async function createFacts () {
 
   for (const [ subject, objects ] of parseFacts(text).entries()) {
     objects.forEach(object => {
-      facts = `${ facts }${ minIndent }<relinst subject="${ subject }" object="${ object }" type="${ relationship }" cf="100" />\n`;
+      facts = `${ facts }${ minIndent }${ factTag(subject, relationship, object) }\n`;
     });
   }
 
