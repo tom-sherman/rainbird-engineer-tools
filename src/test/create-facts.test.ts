@@ -1,5 +1,6 @@
 import * as assert from 'assert';
-import { getMinIndent, parseFacts } from '../create-facts';
+import { parseFacts } from '../create-facts';
+import { getMinIndent } from '../util';
 
 suite('Command :: Create facts', function () {
   test('gets correct min indent', function () {

@@ -1,6 +1,6 @@
 'use strict';
 
-import { getBoundaryLines } from './util';
+import { getBoundaryLines, getMinIndent } from './util';
 import { Position, Range, window } from 'vscode';
 
 export async function createFacts () {
@@ -72,26 +72,4 @@ export function parseFacts (text: string) {
   });
 
   return factMap;
-}
-
-export function getMinIndent (text: string) {
-  let tabIndents: boolean = true;
-
-  const nonEmptyLines = text.split('\n').filter(line => line.trim().length > 0);
-
-  const lineIndents = nonEmptyLines.map(line => {
-    const matches = line.match(/^(?:(\t)|( +))[\w\s]+$/);
-
-    if (matches && matches[1]) {
-      tabIndents = true;
-      return matches[1].length;
-    } else if (matches && matches[2]) {
-      tabIndents = false;
-      return matches[2].length;
-    } else {
-      return 0;
-    }
-  });
-
-  return (tabIndents ? '\t' : ' ').repeat(Math.min(...lineIndents));
 }
