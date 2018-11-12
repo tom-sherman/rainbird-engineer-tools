@@ -12,8 +12,8 @@ suite('Command :: Create facts', function () {
       '\t1 tab\n\t\t2 tabs\n\t\t2 tabs': '\t'
     };
 
-    for (const [ string, indent ] of Object.entries(indentDict)) {
-      const minIndent = getMinIndent(string);
+    for (const [ str, indent ] of Object.entries(indentDict)) {
+      const minIndent = getMinIndent(str);
       assert.equal(minIndent, indent);
     }
   });

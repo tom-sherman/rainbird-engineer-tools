@@ -4,28 +4,29 @@ import { createConcinsts } from './create-concinsts';
 import { createFacts } from './create-facts';
 
 export function activate (context: ExtensionContext) {
-    context.subscriptions.push(commands.registerCommand('extension.rbTools', async () => {
-        const options: { [key: string]: (context: ExtensionContext) => Promise<void> } = {
-            createConcinsts,
-            createFacts
-        };
+  context.subscriptions.push(commands.registerCommand('extension.rbTools', async () => {
+    const options: { [key: string]: (context: ExtensionContext) => Promise<void> } = {
+      createConcinsts,
+      createFacts
+    };
 
-        const quickPick = window.createQuickPick();
-        quickPick.items = Object.keys(options).map(label => ({ label }));
+    const quickPick = window.createQuickPick();
+    quickPick.items = Object.keys(options).map(label => ({ label }));
 
-        quickPick.onDidChangeSelection(selection => {
-            if (selection[0]) {
-                options[selection[0].label](context)
+    quickPick.onDidChangeSelection(selection => {
+      if (selection[0]) {
+        options[selection[0].label](context)
                     .catch(console.error);
-            }
-        });
+      }
+    });
 
-        quickPick.onDidHide(() => quickPick.dispose());
+    quickPick.onDidHide(() => quickPick.dispose());
 
-        quickPick.show();
-    }));
+    quickPick.show();
+  }));
 }
 
 // this method is called when your extension is deactivated
 export function deactivate () {
+  return;
 }

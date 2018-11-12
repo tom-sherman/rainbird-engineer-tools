@@ -5,21 +5,21 @@ import { eachLine } from './util';
 export async function createConcinsts () {
   let editor = window.activeTextEditor;
   if (!editor) {
-      return;
+    return;
   }
 
   let conceptType = await window.showInputBox({
-      placeHolder: 'Concept type'
+    placeHolder: 'Concept type'
   });
 
   editor.edit(edit => {
-      if (!editor) {
-          return;
-      }
+    if (!editor) {
+      return;
+    }
 
-      for (const line of eachLine(editor)) {
-          const name = line.text;
-          edit.replace(line.range, `<concinst name="${ name }" type="${ conceptType }" />`);
-      }
+    for (const line of eachLine(editor)) {
+      const name = line.text;
+      edit.replace(line.range, `<concinst name="${ name }" type="${ conceptType }" />`);
+    }
   });
 }
