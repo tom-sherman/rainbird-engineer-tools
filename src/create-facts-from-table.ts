@@ -23,6 +23,10 @@ export async function createFactsFromTable () {
 }
 
 export function factStringFromTable (csv: string) {
+  if (csv.split('\n').length <= 1) {
+    throw new Error('Please select more than one line.');
+  }
+
   const delimiter = guessDelimiter(csv);
   const [ headers, ...records ]: string[][] = parse(csv, { delimiter });
 
@@ -66,7 +70,7 @@ export function guessDelimiter (csv: string) {
     }
   }
   if (typeof maxChar === 'undefined') {
-    throw new Error('Could not detect delimiter in CSV');
+    throw new Error('Could not detect delimiter in CSV.');
   }
   return maxChar;
 }
