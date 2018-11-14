@@ -9,15 +9,22 @@ export async function createFactsFromTable () {
   }
 
   const range = getBoundaryLines(editor);
-  let text = editor.document.getText(range);
-
-  const delimiter = guessDelimiter(text);
-  if (typeof delimiter === 'undefined') {
-    await window.showErrorMessage('Could not detect delimiter in CSV');
+  let facts: string;
+  try {
+    facts = factStringFromTable(editor.document.getText(range));
+  } catch (error) {
+    window.showErrorMessage(error.message);
     return;
   }
 
-  const [ headers, ...records ] = parse(text, { delimiter });
+  editor.edit(edit => {
+    edit.replace(range, facts.trim());
+  });
+}
+
+export function factStringFromTable (csv: string) {
+  const delimiter = guessDelimiter(csv);
+  const [ headers, ...records ] = parse(csv, { delimiter });
 
   let facts = '';
 
@@ -29,10 +36,7 @@ export async function createFactsFromTable () {
     }
   }
 
-  editor.edit(edit => {
-    // edit.delete(range);
-    edit.replace(range, facts.trim());
-  });
+  return facts;
 }
 
 export function guessDelimiter (csv: string) {
@@ -57,6 +61,9 @@ export function guessDelimiter (csv: string) {
         maxChar = text[i];
       }
     }
+  }
+  if (typeof maxChar === 'undefined') {
+    throw new Error('Could not detect delimiter in CSV');
   }
   return maxChar;
 }
