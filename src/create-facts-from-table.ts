@@ -33,7 +33,6 @@ export async function createFactsFromTable () {
     // edit.delete(range);
     edit.replace(range, facts.trim());
   });
-  return;
 }
 
 export function guessDelimiter (csv: string) {
