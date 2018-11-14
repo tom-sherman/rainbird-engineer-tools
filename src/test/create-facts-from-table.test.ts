@@ -16,8 +16,8 @@ suite('Command :: Create facts from table', function () {
 
   test('fact string from table', function () {
     assert.equal(
-      factStringFromTable('a,b,c\nfoo,f,g\ngef,h,d').trim(),
-      '<relinst type="b" subject="foo" object="f" cf="100" />\n<relinst type="c" subject="foo" object="g" cf="100" />\n<relinst type="b" subject="gef" object="h" cf="100" />\n<relinst type="c" subject="gef" object="d" cf="100" />'
+      factStringFromTable('a,b,c\nfoo,f,g\ngef,h,d\ngef,a,').trim(),
+      '<relinst type="b" subject="foo" object="f" cf="100" />\n<relinst type="c" subject="foo" object="g" cf="100" />\n<relinst type="b" subject="gef" object="h" cf="100" />\n<relinst type="c" subject="gef" object="d" cf="100" />\n<relinst type="b" subject="gef" object="a" cf="100" />'
     );
   });
 });
