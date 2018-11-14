@@ -24,13 +24,16 @@ export async function createFactsFromTable () {
 
 export function factStringFromTable (csv: string) {
   const delimiter = guessDelimiter(csv);
-  const [ headers, ...records ] = parse(csv, { delimiter });
+  const [ headers, ...records ]: string[][] = parse(csv, { delimiter });
 
   let facts = '';
 
   for (const [ subject, ...objects ] of records) {
     for (let i = 0; i < objects.length; i++) {
       const object = objects[i];
+      if (object.trim().length === 0) {
+        continue;
+      }
       const relationship = headers[i + 1];
       facts += factTag(subject, relationship, object) + '\n';
     }
