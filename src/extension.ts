@@ -19,6 +19,7 @@ export function activate (context: ExtensionContext) {
       if (selection[0]) {
         try {
           await options[selection[0].label](context);
+          quickPick.hide();
         } catch (error) {
           console.error(error);
         }
