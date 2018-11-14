@@ -42,6 +42,37 @@ Triggering the command with `speaks` as the relationship name becomes:
 <relinst subject="dave" object="welsh" rel="speaks" />
 ```
 
+## Create facts from CSV
+
+Transform a table into a list of facts.
+
+Below is an example table format, as well as it's CSV representation from pasting into VSCode from Excel. Plural facts are supported by using multiple rows with the same subject in column `A`.
+
+Note the top left cell (`A1`) is not used so can be left empty.
+
+| |speaks|has age|has height|
+|---|---|---|---|
+|Fred|English|32|187|
+|Jim|French|45|155|
+|Jim|Spanish|||
+
+```csv
+,speaks,has age,has height
+Fred,English,32,187
+Jim,French,45,155
+Jim,Spanish,,
+```
+
+```xml
+<relinst type="speaks" subject="Fred" object="English" cf="100" />
+<relinst type="has age" subject="Fred" object="32" cf="100" />
+<relinst type="has height" subject="Fred" object="187" cf="100" />
+<relinst type="speaks" subject="Jim" object="French" cf="100" />
+<relinst type="has age" subject="Jim" object="45" cf="100" />
+<relinst type="has height" subject="Jim" object="155" cf="100" />
+<relinst type="speaks" subject="Jim" object="Spanish" cf="100" />
+```
+
 ## RBLang/XML snippets
 
 This extension also provides snippets which mirror those in the Rainbird RBLang editor.
