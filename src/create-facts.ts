@@ -20,7 +20,7 @@ export async function createFacts () {
   }
   const text = editor.document.getText(range);
   const minIndent = getMinIndent(text);
-  let facts = minIndent;
+  let facts = '';
 
   for (const [ subject, objects ] of parseFacts(text).entries()) {
     objects.forEach(object => {
