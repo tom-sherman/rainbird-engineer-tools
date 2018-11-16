@@ -1,10 +1,10 @@
 'use strict';
-import { TextEditor } from 'vscode';
+import { TextEditor, Range, Position } from 'vscode';
 
 export function *eachLine (editor: TextEditor) {
-  const { startLine, endLine } = getBoundaryLines(editor);
+  const range = getBoundaryLines(editor);
 
-  for (let index = startLine; index <= endLine; index++) {
+  for (let index = range.start.line; index <= range.end.line; index++) {
     let range = editor.document.lineAt(index).range;
     let text = editor.document.getText(range);
 
@@ -15,10 +15,12 @@ export function *eachLine (editor: TextEditor) {
 }
 
 export function getBoundaryLines (editor: TextEditor) {
-  return {
-    startLine: Math.min(editor.selection.anchor.line, editor.selection.active.line),
-    endLine: Math.max(editor.selection.anchor.line, editor.selection.active.line)
-  };
+    const startLine = Math.min(editor.selection.anchor.line, editor.selection.active.line);
+    const endLine = Math.max(editor.selection.anchor.line, editor.selection.active.line);
+    return new Range(
+      new Position(startLine, 0),
+      new Position(endLine, Number.MAX_SAFE_INTEGER)
+    );
 }
 
 export function getMinIndent (text: string) {

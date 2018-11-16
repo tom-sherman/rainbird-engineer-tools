@@ -1,7 +1,7 @@
 'use strict';
 
 import { getBoundaryLines, getMinIndent, factTag } from './util';
-import { Position, Range, window } from 'vscode';
+import { window } from 'vscode';
 
 export async function createFacts () {
   let editor = window.activeTextEditor;
@@ -9,11 +9,7 @@ export async function createFacts () {
     return;
   }
 
-  const { startLine, endLine } = getBoundaryLines(editor);
-  const range = new Range(
-    new Position(startLine, 0),
-    new Position(endLine, Number.MAX_SAFE_INTEGER)
-  );
+  const range = getBoundaryLines(editor);
 
   const relationship = await window.showInputBox({
     placeHolder: 'Relationship name'
@@ -24,7 +20,7 @@ export async function createFacts () {
   }
   const text = editor.document.getText(range);
   const minIndent = getMinIndent(text);
-  let facts = minIndent;
+  let facts = '';
 
   for (const [ subject, objects ] of parseFacts(text).entries()) {
     objects.forEach(object => {
