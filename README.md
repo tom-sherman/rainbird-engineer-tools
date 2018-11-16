@@ -44,6 +44,8 @@ Triggering the command with `speaks` as the relationship name becomes:
 
 ## Create facts from CSV
 
+![facts from table](https://giant.gfycat.com/JaggedCreepyFirefly.webm)
+
 Transform a table into a list of facts.
 
 Below is an example table format, as well as it's CSV representation from pasting into VSCode from Excel. Plural facts are supported by using multiple rows with the same subject in column `A`.
