@@ -44,7 +44,7 @@ Triggering the command with `speaks` as the relationship name becomes:
 
 ## Create facts from CSV
 
-![facts from table](https://giant.gfycat.com/JaggedCreepyFirefly.webm)
+![facts from table](https://giant.gfycat.com/JaggedCreepyFirefly.gif)
 
 Transform a table into a list of facts.
 
